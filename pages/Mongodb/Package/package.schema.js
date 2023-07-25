@@ -3,7 +3,8 @@ const {Schema} = mongoose
 
 const packageSchema = new Schema({
   name: String,
-  code: String
+  code: String,
+  fileDirName: String
 })
 
 export {
