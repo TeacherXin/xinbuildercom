@@ -1,5 +1,5 @@
-import fs from 'fs'
-import path from 'path'
+import mongoose from "mongoose"
+import { packageContentSchema } from '../Mongodb/Package/packageConent.schema.js'
 
 const startTag = 'text/javascript'
 const endTag = '------'
@@ -23,10 +23,12 @@ export default async function(req, res){
     content = content.slice(index + startTag.length + 1)
     index = content.indexOf(endTag)
     content = content.slice(0,index)
-    fs.writeFile(path.resolve(`C:\\Myself\\React-cli\\xinbuildercom\\assets\\defineCom\\${hashName}_${filename}`),content,(err) => {
-      if(err){
-        console.log(err);
-      }
+    // 组件入库
+    const defineComModel = mongoose.createConnection('mongodb://127.0.0.1/defineCom');
+    const packageConentModel = defineComModel.model('packageConent',packageContentSchema)
+    packageConentModel.create({
+      name: `${hashName}_${filename}`,
+      fileConent: content
     })
     res.status(200).json({ 
       filename: `${hashName}_${filename}`
