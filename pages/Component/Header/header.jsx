@@ -19,7 +19,8 @@ export default function Header(props) {
       axios.post('/api/addpackage',{
         name: fileName,
         code: fileCode,
-        fileDirName
+        fileDirName,
+        username: JSON.parse(localStorage.getItem('user')).username
       })
       .then(res => {
         message.success('新建成功')
@@ -42,7 +43,7 @@ export default function Header(props) {
 
   return (
     <div className={header}>
-      {/* <h2 className={title}>XinBuilder-Com基于React实现自定义组件</h2> */}
+      <h2 className={title}>XinBuilder-Com基于React实现自定义组件</h2>
       <Button onClick={() => {setShowModal(true)}} className={button} style={{display: props.hideButton ? 'none' : 'block'}}>新建组件</Button>
       <Modal closable={false} title="上传组件" open={showModal} onOk={handleOk} onCancel={handleCancel}>
         <Form

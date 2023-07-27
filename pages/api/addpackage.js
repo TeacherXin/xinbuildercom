@@ -7,7 +7,8 @@ export default function(req,res){
     packageModel.create({
       name: req.body.name,
       code: req.body.code,
-      fileDirName: req.body.fileDirName
+      fileDirName: req.body.fileDirName,
+      username: req.body.username
     })
     res.status(200).json({ text: 'Hello' })
   }
