@@ -1,6 +1,6 @@
 import { Button, Card, message } from 'antd'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from './Component/Header/header'
 import Router from "next/router"
 import { DeleteOutlined } from '@ant-design/icons';
@@ -13,6 +13,12 @@ export default function Main() {
   }
   useEffect(() => {
     getPackageList()
+  },[])
+
+  useEffect(() => {
+    window.React = React
+    window.useEffect = useEffect;
+    window.useState = useState;
   },[])
 
   const toComView = (item) => {
@@ -40,7 +46,7 @@ export default function Main() {
   return (
     <div>
       <Header getPackageList={getPackageList}/>
-      <div style={{marginTop: '20px', marginLeft: '20px',display:'flex'}}>
+      <div style={{marginTop: '20px', marginLeft: '20px',display:'flex',flexWrap:'wrap'}}>
         {
           packageList.map((item) => {
             return <Card
@@ -48,7 +54,8 @@ export default function Main() {
               title={<div><span>{item.name}</span><DeleteOutlined onClick={delPackge(item)} style={{float:'right'}}/></div>}
               style={{
                 width: 250,
-                marginLeft: '10px'
+                marginLeft: '10px',
+                marginTop:'10px'
               }}
             >
               <Button onClick={toComView(item)} type='text'>查看组件</Button>

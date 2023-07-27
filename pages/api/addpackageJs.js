@@ -24,11 +24,14 @@ export default async function(req, res){
     index = content.indexOf(endTag)
     content = content.slice(0,index)
     // 组件入库
+    const fileCode = require("@babel/core").transformSync(content, {
+      presets: ["@babel/preset-react"]
+    });
     const defineComModel = mongoose.createConnection('mongodb://127.0.0.1/defineCom');
     const packageConentModel = defineComModel.model('packageConent',packageContentSchema)
     packageConentModel.create({
       name: `${hashName}_${filename}`,
-      fileConent: content
+      fileConent: fileCode.code
     })
     res.status(200).json({ 
       filename: `${hashName}_${filename}`

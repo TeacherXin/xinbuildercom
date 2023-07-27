@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import parse from "html-react-parser";
 import axios from 'axios'
 import { withRouter } from "next/router";
 import  Header  from './Component/Header/header.jsx';
@@ -14,14 +13,20 @@ export default withRouter(function ComView({ router }) {
       _id: router.query._id || location.search.replace('?_id=','')
     })
     const fileDirName = res.data.packageItem?.fileDirName;
-    const fileConent = await axios.post('api/getcomFile',{
+    const fileRes = await axios.post('api/getcomFile',{
       fileDirName
     })
-    let reactCom = parse(fileConent.data.fileConent?.fileConent || '');
-    setCom(reactCom[1])
+    const fileContent = fileRes.data.fileConent?.fileConent.replaceAll('\n','').replaceAll('\r','')
+    const fileCom = new Function('return '+fileContent)
+    const Com = fileCom();
+    setCom(<Com />);
     setSpinning(false)
   }
 
+  useEffect(() => {
+    window.React = React
+  },[])
+  
   useEffect(() => {
     getPackageItem()
   },[])
