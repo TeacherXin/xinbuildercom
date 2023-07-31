@@ -5,7 +5,6 @@ import axios from 'axios';
 const UploadCom = React.forwardRef((props,ref) => {
   const [fileList, setFileList] = useState([]);
   const [uploading, setUploading] = useState(false);
-  const UploadRef = useRef();
   const handleUpload = async () => {
     const formData = new FormData();
     fileList.forEach((file) => {
