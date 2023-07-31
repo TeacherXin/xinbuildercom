@@ -9,9 +9,10 @@ export default async function (req, res) {
     res.status(200).json({ data:  packageConfig})
   }else if(req.method === 'GET'){
     const fileDirName = req.url.replace('/api/getpackageConfig?fileDirName=','');
+    res.setHeader("Access-Control-Allow-Origin","*");
     const defineComModel = mongoose.createConnection('mongodb://127.0.0.1/defineCom');
     const packageConfigModal = defineComModel.model('packageConfig',packageConfigSchema);
     const packageConfig = await packageConfigModal.find({fileDirName: fileDirName})
-    res.status(200).json({ data:  packageConfig})
+    res.status(200).json({packageConfig})
   }
 }

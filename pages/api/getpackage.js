@@ -13,8 +13,15 @@ export default async function (req, res) {
       res.status(200).json({ packageList })
     }
   }else if(req.method === 'GET'){
-    const packageList = await packageModel.find({})
-    res.setHeader("Access-Control-Allow-Origin","*");
-    res.status(200).json({ packageList })
+    const code = req.url.replace('/api/getpackage?code=','');
+    if(code === '/api/getpackage'){
+      const packageList = await packageModel.find({})
+      res.setHeader("Access-Control-Allow-Origin","*");
+      res.status(200).json({ packageList })
+    }else if(code){
+      const packageList = await packageModel.findOne({code})
+      res.setHeader("Access-Control-Allow-Origin","*");
+      res.status(200).json({ packageList })
+    }
   }
 }
