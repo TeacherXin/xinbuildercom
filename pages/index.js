@@ -1,6 +1,6 @@
 import { Button, Card, message } from 'antd'
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Header from '../Component/Header/header'
 import Router from "next/router"
 import { DeleteOutlined } from '@ant-design/icons';
@@ -19,6 +19,7 @@ export default function Main() {
     window.React = React
     window.useEffect = useEffect;
     window.useState = useState;
+    window.useRef = useRef;
   },[])
 
   const toComView = (item) => {

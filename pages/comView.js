@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { withRouter } from "next/router";
 import  Header  from '../Component/Header/header.jsx';
@@ -46,6 +46,7 @@ export default withRouter(function ComView({ router }) {
     window.React = React
     window.useEffect = useEffect;
     window.useState = useState;
+    window.useRef = useRef;
   },[])
   
   useEffect(() => {
