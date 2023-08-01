@@ -1,7 +1,7 @@
 import { Button, Card, message } from 'antd'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import Header from './Component/Header/header'
+import Header from '../Component/Header/header'
 import Router from "next/router"
 import { DeleteOutlined } from '@ant-design/icons';
 

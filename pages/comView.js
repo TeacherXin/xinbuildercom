@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { withRouter } from "next/router";
-import  Header  from './Component/Header/header.jsx';
+import  Header  from '../Component/Header/header.jsx';
 import { Button, Modal, Spin, Input } from 'antd';
 
 export default withRouter(function ComView({ router }) {

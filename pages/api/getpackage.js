@@ -1,4 +1,4 @@
-import { packageSchema } from "../Mongodb/Package/package.schema";
+import { packageSchema } from "../../Mongodb/Package/package.schema";
 import mongoose from "mongoose";
 
 export default async function (req, res) {

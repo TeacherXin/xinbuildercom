@@ -44,4 +44,6 @@ const UploadCom = React.forwardRef((props,ref) => {
     </>
   );
 });
+
+UploadCom.displayName = UploadCom
 export default UploadCom;

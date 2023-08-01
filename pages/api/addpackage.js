@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { packageSchema } from "../Mongodb/Package/package.schema";
+import { packageSchema } from "../../Mongodb/Package/package.schema";
 export default function(req,res){
   if(req.method === 'POST'){
     const defineComModel = mongoose.createConnection('mongodb://127.0.0.1/defineCom');

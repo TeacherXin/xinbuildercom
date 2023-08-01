@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import { packageSchema } from "../Mongodb/Package/package.schema";
-import {packageContentSchema} from '../Mongodb/Package/packageConent.schema'
+import { packageSchema } from "../../Mongodb/Package/package.schema";
+import {packageContentSchema} from '../../Mongodb/Package/packageConent.schema'
 
 export default async function(req,res){
   if(req.method === 'POST'){

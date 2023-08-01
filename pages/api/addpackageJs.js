@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import { packageContentSchema } from '../Mongodb/Package/packageConent.schema.js'
+import { packageContentSchema } from '../../Mongodb/Package/packageConent.schema.js'
 
 const startTag = 'text/javascript'
 const endTag = '------'
