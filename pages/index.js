@@ -11,8 +11,21 @@ export default function Main() {
     const result = await axios.post('/api/getpackage');
     setPackageList(result.data.packageList)
   }
+
   useEffect(() => {
-    getPackageList()
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    if(user){
+      axios.post(`http://${window.location.hostname}:3003/login/getUser`,{
+        username: user.username,
+        password: user.password
+      }).then(res => {
+        if(res.data.data){
+          getPackageList();
+        }else{
+          Router.push({pathname: '/login'})
+        }
+      })
+    }
   },[])
 
   useEffect(() => {

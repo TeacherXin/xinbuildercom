@@ -3,6 +3,7 @@ import { Button,Modal,Form,Input, message } from 'antd'
 import axios from 'axios'
 import UploadCom from '../UpLoad/index.js'
 import { useRef, useState } from 'react'
+import Router from 'next/router'
 
 export default function Header(props) {
   const {header, title, button} = styles
@@ -41,9 +42,15 @@ export default function Header(props) {
     setShowModal(false)
   }
 
+  const refeshLogin = () => {
+    localStorage.removeItem('user');
+    Router.push('/login')
+  }
+
   return (
     <div className={header}>
       <h2 className={title}>XinBuilder-Com基于React实现自定义组件</h2>
+      <Button onClick={refeshLogin} className={button} style={{display: props.hideButton ? 'none' : 'block'}}>退出登录</Button>
       <Button onClick={() => {setShowModal(true)}} className={button} style={{display: props.hideButton ? 'none' : 'block'}}>新建组件</Button>
       <Modal closable={false} title="上传组件" open={showModal} onOk={handleOk} onCancel={handleCancel}>
         <Form
