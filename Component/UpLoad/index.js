@@ -12,7 +12,7 @@ const UploadCom = React.forwardRef((props,ref) => {
     });
     setUploading(true);
     // You can use any AJAX library you like
-    const result = await axios.post('http://localhost:3000/api/addpackageJs', 
+    const result = await axios.post('/api/addpackageJs', 
       formData
     )
     return result
