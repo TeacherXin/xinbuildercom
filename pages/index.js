@@ -15,7 +15,7 @@ export default function Main() {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     if(user){
-      axios.post(`http://${window.location.hostname}:3003/login/getUser`,{
+      axios.post(`http://${window.location.hostname}:80/login/getUser`,{
         username: user.username,
         password: user.password
       }).then(res => {

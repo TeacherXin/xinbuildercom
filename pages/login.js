@@ -23,7 +23,7 @@ export default function Login() {
   const [messageApi, contextHolder] = message.useMessage();
 
   const login = async () => {
-    axios.post(`http://${window.location.hostname}:3003/login/getUser`,{
+    axios.post(`http://${window.location.hostname}:80/login/getUser`,{
       username,
       password
     }).then(res => {
