@@ -67,7 +67,7 @@ export default withRouter(function ComView({ router }) {
       setIsModalOpen(false);
       setAttributeName('');
       setAttributeType('');
-      getPackageConfig();
+      getPackageConfig(fileDirName);
     }
   }
 
