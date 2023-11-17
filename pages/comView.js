@@ -2,12 +2,13 @@ import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { withRouter } from "next/router";
 import  Header  from '../Component/Header/header.jsx';
-import { Button, Modal, Spin, Input } from 'antd';
+import { Button, Modal, Spin, Input, message } from 'antd';
 
 export default withRouter(function ComView({ router }) {
   const [Com, setCom] = useState(null)
   const [spinning, setSpinning] = useState(true)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [attributeCode, setAttributeCode] = useState('')
   const [attributeName, setAttributeName] = useState('')
   const [attributeType, setAttributeType] = useState('')
   const [fileDirName, setFileDirName] = useState('')
@@ -36,7 +37,7 @@ export default withRouter(function ComView({ router }) {
     })
     if(res.data){
       const configList = res.data.data.map(item => {
-        return item.packageConfig
+        return {...item.packageConfig, _id: item._id}
       })
       setConfigList(configList)
     }
@@ -57,17 +58,31 @@ export default withRouter(function ComView({ router }) {
     setIsModalOpen(false)
   }
 
-  const handleOk = () => {
-    const res = axios.post('/api/addpackageConfig', {
+  const handleOk = async () => {
+    const res = await axios.post('/api/addpackageConfig', {
       fileDirName,
       attributeName,
+      attributeCode,
       attributeType
     })
     if(res){
       setIsModalOpen(false);
       setAttributeName('');
+      setAttributeCode('');
       setAttributeType('');
       getPackageConfig(fileDirName);
+    }
+  }
+
+  const delAttribute = (_id) => {
+    return async () => {
+      const res = await axios.post('/api/deletepackageConfig', {
+        _id
+      })
+      if(res.data) {
+        message.success('删除成功');
+        getPackageConfig(fileDirName);
+      }
     }
   }
 
@@ -96,8 +111,11 @@ export default withRouter(function ComView({ router }) {
                       <div style={{height:'40px', fontSize:'16px'}}>
                         <span>属性名称：</span>
                         <span style={{marginRight:'20px',color:'gray'}}>{item.attributeName}</span>
+                        <span>属性编码：</span>
+                        <span style={{marginRight:'20px',color:'gray'}}>{item.attributeCode}</span>
                         <span>属性类型：</span>
                         <span style={{color:'gray'}}>{item.attributeType}</span>
+                        <Button onClick={delAttribute(item._id)} style={{float:'right'}}>删除</Button>
                       </div>
                     </div>
                   })
@@ -110,6 +128,10 @@ export default withRouter(function ComView({ router }) {
         <div style={{height: '50px'}}>
           属性名称：
           <Input value={attributeName} onChange={(e) => {setAttributeName(e.target.value)}} style={{width:'200px'}} />
+        </div>
+        <div style={{height: '50px'}}>
+          属性编码：
+          <Input value={attributeCode} onChange={(e) => {setAttributeCode(e.target.value)}} style={{width:'200px'}} />
         </div>
         <div>
           属性类型：

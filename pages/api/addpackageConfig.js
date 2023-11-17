@@ -9,6 +9,7 @@ export default async function (req, res) {
       fileDirName: req.body.fileDirName,
       packageConfig: {
         attributeName: req.body.attributeName,
+        attributeCode: req.body.attributeCode,
         attributeType: req.body.attributeType
       }
     })

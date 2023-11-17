@@ -5,7 +5,8 @@ const packageConfigSchema = new Schema({
   fileDirName: String,
   packageConfig: {
     attributeName: String,
-    attributeType: String
+    attributeType: String,
+    attributeCode: String
   }
 })
 
